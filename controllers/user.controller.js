@@ -14,15 +14,22 @@ export const getUsers = async (req, res) => {
 };
 
 export const getUser = async (req, res) => {
+  const { userName } = req.params;
   const { password } = req.body;
-
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  console.log(mongoose.Types);
+  /*if (!mongoose.Types.ObjectId.isValid(id)) {
     return res
       .status(404)
       .json({ success: false, message: "User does not exist!" });
-  }
+  }*/
   try {
-    const user = await User.findById(id);
+    const user = await User.findOne({ userName: userName });
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User does not exist!" });
+    }
     if (user.password === password) {
       res.status(200).json({ success: true, data: user });
     } else {
