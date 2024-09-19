@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    games: {
+    sessions: {
       type: Array,
       required: true,
     },
@@ -38,6 +38,14 @@ const userSchema = new mongoose.Schema(
       type: Number,
       required: false,
     },
+    profileImg: {
+      type: String,
+      required: false,
+    },
+    average: {
+      type: Number,
+      required: true,
+    }
   },
   {
     timestamps: true,
